@@ -17,6 +17,12 @@ ul {
   margin-top: 0;
 }
 
+iframe{
+	height: 100%;
+	width: 80%;
+	z-index: 20;
+}
+
 .admin-icon-yellow {
   color: #ffbe40;
 }
@@ -50,7 +56,7 @@ ul {
 }
 
 .admin-sidebar {
-  width: 260px;
+  width: 20%;
   min-height: 100%;
   float: left;
   border-right: 1px solid #cecece;
