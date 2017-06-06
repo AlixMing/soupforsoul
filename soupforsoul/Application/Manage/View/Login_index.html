@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<title>海控金融活动后台管理</title>
+	<script>
+	//	var verifyUrl="{:U('Login/verify','','')}";
+		var CONTROL_U = "{:U('Login/checkusername')}";
+		var CONTROL_P = "{:U('Login/checkpassword')}";
+		var URLPATHDEPR = "{:C('URL_PATHINFO_DEPR')}";
+	</script>
+
+	<script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+	<script src="__PUBLIC__/js/login.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/css/login.css">
+</head>	
+<body>
+	<div class="login">
+		<div class="loginForm">	
+			<form action="{:U('Login/login')}" method="post" id="login">
+			<div class="title">
+				海控金融活动后台管理登录
+			</div>
+			<table width="100%">
+				<tr>
+					<th>帐号:</th>
+					<td>
+						<input type="text" name="username" class="len220">
+					</td>
+				</tr>
+				<tr>
+					<th>密码:</th>
+					<td>
+						<input type="password" class="len220" name="password">
+					</td>
+				</tr>
+				<!--<tr>-->
+					<!--<th>验证码:</th>-->
+				  <!--<td>-->
+						<!--<input type="code" class="len220" name="code" autocomplete="off" /></td>-->
+				<!--</tr>-->
+				<!--?-->
+				<tr>
+					<td colspan="2" style="padding-left:120px;"><input type="submit" class="btn_blue" value="登录"><span class="msg"></span></td>
+				</tr>
+			</table>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

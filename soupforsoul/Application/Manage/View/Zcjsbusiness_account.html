@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<title></title>
+	<link rel="stylesheet" href="__PUBLIC__/css/style.css">
+	<script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+	<script src="__PUBLIC__/js/common.js"></script>
+	<script src="__PUBLIC__/js/jquery.form.min.js"></script>
+</head>
+<body>
+
+<div class="main">
+    <div class="pos">设置商家账号</div>
+	<div class="form">
+		<form method='post' id="form_do" name="form_do" action="{:U('Zcjsbusiness/account')}/id/{$business[id]}">
+			<dl>
+				<dt>商家名称：</dt>
+				<dd>
+					{$business[name]}
+				</dd>
+			</dl>
+			<dl>
+				<dt>账号：</dt>
+					<if condition="$business.username eq null">
+						<input type="text" name="username" class="inp_one">
+						<else />
+						<input type="text" name="username" class="inp_one" value="{$business[username]}">
+					</if>
+				</dd>
+			</dl>
+			<dl>
+				<dt>密码：</dt>
+				<dd>
+					<input type="password" name="password" class="inp_one">
+				</dd>
+			</dl>
+			<div class="form_b">
+				<input type="submit" class="btn_blue" id="submit" value="提 交">
+			</div>
+	   </form>
+	</div>
+</div>
+
+</body>
+</html>

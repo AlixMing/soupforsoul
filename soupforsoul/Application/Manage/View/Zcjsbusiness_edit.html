@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<title></title>
+	<link rel="stylesheet" href="__PUBLIC__/css/style.css">
+	<script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+	<script src="__PUBLIC__/js/common.js"></script>
+	<script src="__PUBLIC__/js/jquery.form.min.js"></script>
+	<style>
+		.jbox {
+			top: 5px !important;
+		}
+		.litpic_btn2 {
+			width: 80px;
+			height: 30px;
+			font-size: 14px;
+			position: relative;
+			overflow: hidden;
+			line-height: 30px;
+			color: #fff;
+			text-align: center;
+			vertical-align: middle;
+			cursor: pointer;
+			background-color: #2ca22c;
+			border: 1px solid #cccccc;
+			border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+			border-bottom-color: #b3b3b3;
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			border-radius: 4px;
+			margin: 5px;
+		}
+		.litpic_btn2 input, .file_btn input, .btn_up2 input {
+			position: absolute;
+			top: 0;
+			right: 0;
+			margin: 0;
+			border: solid transparent;
+			opacity: 0;
+			filter: alpha(opacity=0);
+			cursor: pointer;
+		}
+	</style>
+	<script>
+		$(function () {
+			//缩略图上传
+			var litpic_tip = $(".litpic_tip");
+			var btn = $(".litpic_btn span");
+			$("#fileupload").wrap("<form id='myupload' action='{:U('Public/upload')}' method='post' enctype='multipart/form-data'></form>")
+					.change(function() {
+
+				if ($("#fileupload").val() == "") return;
+				$("#myupload").ajaxSubmit({
+					dataType: 'json',
+					beforeSend: function() {
+						$('#litpic_show').empty();
+						btn.html("上传中...");
+					},
+					success: function(data) {
+						if (data.state == 'SUCCESS') {
+							btn.html("上传成功");
+							$("#litpic").val(data.info[0].url);
+							$('#litpic_show').html("<img src='"+data.info[0].url+"' width='120'>");
+						} else {
+							litpic_tip.html(data.state);
+						}
+					},
+					error: function(xhr) {
+						btn.html("上传失败");
+						litpic_tip.html(xhr);
+					}
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+
+<div class="main">
+    <div class="pos">编辑商家</div>
+	<div class="form">
+		<form method='post' id="form_do" name="form_do" action="{:U('Zcjsbusiness/edit')}/id/{$bid}">
+			<dl>
+				<dt>商家名称：</dt>
+				<dd>
+					<input type="text" name="name" class="inp_one" value="{$vlist[0][name]}" />
+				</dd>
+			</dl>
+			<dl>
+				<dt>奖品名称：</dt>
+				<dd>
+					<input type="text" name="goods" class="inp_one" value="{$vlist[0][goods]}" />
+				</dd>
+			</dl>
+			<dl>
+				<dt style="height: 45px;line-height: 45px;">商家LOGO：</dt>
+				<dd>
+					<div class="litpic_show">
+						<div style="float:left;">
+							<input type="text" class="inp_w250" name="bgimg" id="litpic" value="{$vlist[0][bgimg]}" />
+						</div>
+						<div class="litpic_btn">
+							<span>上传</span>
+							<input id="fileupload" type="file" name="mypic">
+						</div>
+						<div class="litpic_tip"></div>
+						<div id="litpic_show"><img src="{$vlist[0][bgimg]}" width='120' /></div>
+					</div>
+				</dd>
+			</dl>
+			<div class="form_b">
+				<input type="submit" class="btn_blue" id="submit" value="修 改">
+			</div>
+	   </form>
+	</div>
+</div>
+
+</body>
+</html>

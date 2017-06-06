@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<title></title>
+	<link rel="stylesheet" href="__PUBLIC__/css/style.css">
+	<script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+	<script src="__PUBLIC__/js/common.js"></script>
+	<script src="__PUBLIC__/js/jquery.form.min.js"></script>
+</head>
+<body>
+
+<div class="main">
+    <div class="pos">兑换码详情</div>
+	<div class="form">
+		<form method='post' id="form_do" name="form_do" action="{:U('Zcjscode/detail')}/code/{$code}">
+			<dl>
+				<dt>商家名称：</dt>
+				<dd>
+					{$vlist[0][name]}
+				</dd>
+			</dl>
+			<dl>
+				<dt>奖品名称：</dt>
+				<dd>
+					{$vlist[0][goods]}
+				</dd>
+			</dl>
+			<dl>
+				<dt>兑换码：</dt>
+				<dd>
+					{$vlist[0][code]}
+					<input type="hidden" name="code" value="{$vlist[0][code]}" />
+				</dd>
+			</dl>
+			<dl>
+				<dt>手机号：</dt>
+				<dd>
+					{$vlist[0][phone]}
+				</dd>
+			</dl>
+			<dl>
+				<dt>获取时间：</dt>
+				<dd>
+					{$vlist[0][create_time]|date='Y-m-d h:i:s',###}
+				</dd>
+			</dl>
+			<if condition="$vlist[0][state] neq 0">
+				<dl>
+					<dt>兑换时间：</dt>
+					<dd>
+						{$vlist[0][exchange_time]|date='Y-m-d h:i:s',###}
+					</dd>
+				</dl>
+			</if>
+			<dl>
+				<dt>状态：</dt>
+				<dd>
+					<if condition="$vlist[0][state] eq 0">
+						未使用
+						<else />
+						已兑换
+					</if>
+					<input type="hidden" name="state" value="{$vlist[0][state]}" />
+				</dd>
+			</dl>
+
+			<if condition="$vlist[0][state] eq 0">
+			<div class="form_b">
+				<input type="submit" class="btn_blue" id="submit" value="兑 换">
+			</div>
+			</if>
+
+	   </form>
+	</div>
+</div>
+
+</body>
+</html>

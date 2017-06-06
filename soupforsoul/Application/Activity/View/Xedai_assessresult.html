@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <link rel="icon" href="__PUBLIC__/images/favicon.ico" type="image/x-icon">
+    <title>薪e贷</title>
+    <link rel="stylesheet" href="__PUBLIC__/css/common.css">
+    <link rel="stylesheet" href="__VIEW__/css/xedai.index.css">
+    <script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+    <script src="__PUBLIC__/js/functions.js"></script>
+    <script src="__VIEW__/src/xedai.index.js?v=__VERSION__"></script>
+    <script src="__PUBLIC__/js/layer_mobile/layer.js"></script>
+    <!-- 微信 -->
+     <php> if (isWeixin()) { </php>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+    <script src="__PUBLIC__/js/md5.js"></script>
+    <script src="__PUBLIC__/js/sha1.js"></script>
+    <script src="__PUBLIC__/js/weixin.js?v=__VERSION__"></script>
+    <php> } </php>
+     <script>
+        var G_prefix = "xedai";
+        <php> if (isWeixin()) { </php>
+        var G_weixin = new Weixin({
+            APPID:"{$Think.config.WX_APPID}",
+            APPSECRET:"",
+            DEBUG:false,
+            PREFIX:G_prefix,
+
+            TOKEN_PATH:"?s=Activity/Weixin/token",
+            GETTICKET_PATH:"?s=Activity/Weixin/getticket",
+            USERINFO_PATH:"?s=Activity/Weixin/userinfo",
+            ACCESS_TOKEN_PATH:"?s=Activity/Weixin/access_token",
+
+            SHARE_TITLE:"薪e贷上线啦！",
+            SHARE_DESC:"买房，买车，装修，结婚...轻松一点全搞定！",
+            SHARE_URL:"http://{$Think.server.SERVER_NAME}__ROOT__/index.php?s=Activity/Xedai/index",
+            SHARE_ICON:"http://{$Think.server.SERVER_NAME}__VIEW__/image/xedai/topimg.png",
+
+            PAY_PATH:"",
+
+            CODE:"{$code}",
+            CODE_PATH:"http://{$Think.server.SERVER_NAME}__ROOT__/index.php?s=Activity/Xedai/assessresult/id/{$id}",
+            CODE_STATE:"123"
+        });
+        <php> } </php>
+        $(function () {
+            // <php> if (isWeixin()) { </php>G_weixin.bindShare();<php> } </php>
+            
+
+            init(2);
+        });
+    </script>
+    
+</head>
+<body>
+
+    <div class="X-main" >
+        <div class="X-top">
+            <img src="__VIEW__/image/xedai/access04.png">
+        </div>
+
+        <div class="X-content">
+            <div class="X-userimg">
+                <img src="__VIEW__/image/xedai/defaultimg.png" id="wxheadimg">
+            </div>
+            <div class="eduimg">
+               <!--  <div class="credit">￥<span>{$credit}</span></div>
+                <if condition="$status eq 0">
+                    <img src="__VIEW__/image/xedai/access01.png">
+                <elseif condition="$status eq 1"/>
+                    <img src="__VIEW__/image/xedai/access00.png">
+                <else /> 
+                    <img src="__VIEW__/image/xedai/access01.png">
+                </if> -->
+            </div>
+            <div class="button">
+                <!-- <if condition="$status eq 0">
+                    <div class="accessbutton">
+                        <a href="javascript:borrow('{$phone}','{$id}')"><img src="__VIEW__/image/xedai/botton1.png" ></a>
+                    </div>
+                <else/>    
+                    <div class="accessbutton">
+                        <a href="tel:0756-8336111"><img src="__VIEW__/image/xedai/access02.png"/></a>
+                    </div>
+                </if> -->
+            </div>
+            <div class="accessbutton">
+                <a href="javascript:$('.share-tips').show()"><img src="__VIEW__/image/xedai/botton2.png" ></a>
+            </div>
+        </div>
+         <div class="X-bottom">
+            <img src="__VIEW__/image/xedai/footerimg.jpg">
+        </div>
+    </div><!-- end g-body -->
+    <div class="share-tips" onclick="$('.share-tips').hide()"></div>
+</body>
+</html>

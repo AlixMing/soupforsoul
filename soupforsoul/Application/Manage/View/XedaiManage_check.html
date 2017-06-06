@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<title></title>
+		<link rel="stylesheet" href="__PUBLIC__/css/style.css">
+		<link rel="stylesheet" href="__PUBLIC__/css/bootstrap/boostrap.css">
+		<script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+		<script src="__PUBLIC__/js/common.js"></script>
+		<script src="__PUBLIC__/js/layer/layer.js"></script>
+	</head>
+
+	<body>
+		<div class="main">
+			<div class="pos">申请详情</div>
+			<div class="form">
+				<form method='post' id="form_do" name="form_do">
+					
+					<if condition="$recordDetail|count neq 0">
+						<div class="div-container">
+						<div class="div-header">
+							<h2>操作记录</h2>
+						</div>
+						<table class="gridtable" width="100%">
+											<tr>
+												<th>操作</th>
+												<th>操作人</th>
+												<th>操作时间</th>
+											</tr>
+											<foreach name='recordDetail' item='vo'>
+												<tr>
+					<td>{$vo.record}</td>
+					<td><if condition="$vo[user] eq ''">系统<else/>{$vo.user}</if></td>
+					<td>{$vo.create_time}</td>
+					</tr>
+					</foreach>
+					</table>
+					</div>						
+					</if>
+					
+					<div class="div-container" style="margin-top: 20px;">
+						<div class="div-header">
+							<h2>用户信息</h2>
+						</div>
+						<div class="div-body">
+							<dl>
+								<dt>姓名：</dt>
+								<dd>
+									{$detail.name}
+								</dd>
+							</dl>
+							<dl>
+								<dt>工号：</dt>
+								<dd>
+									{$detail.worknum}
+								</dd>
+							</dl>
+							<dl>
+								<dt>手机号：</dt>
+								<dd>
+									{$detail.phone}
+								</dd>
+							</dl>
+							<dl>
+								<dt>身份证号：</dt>
+								<dd>
+									{$detail.iden}
+								</dd>
+							</dl>
+						</div>
+					</div>
+
+					<div class="div-container" style="margin-top: 20px;">
+						<div class="div-header">
+							<h2>银行信息</h2>
+						</div>
+						<div class="div-body">
+						
+						<dl>
+							<dt>开户名：</dt>
+							<dd>
+								{$detail.name}
+							</dd>
+						</dl>
+						<dl>
+							<dt>银行：</dt>
+							<dd>
+								{$detail.bankname}
+							</dd>
+						</dl>
+						<dl>
+							<dt>银行卡号：</dt>
+							<dd>
+								{$detail.banknum}
+							</dd>
+						</dl>
+						</div>
+					</div>
+
+					<div class="div-container" style="margin-top: 20px;">
+						<div class="div-header">
+							<h2>贷款信息</h2>
+						</div>
+						<div class="div-body">
+						
+						<dl>
+							<dt>贷款额度：</dt>
+							<dd>
+								{$detail.limitnum}元
+							</dd>
+						</dl>
+						<dl>
+							<dt>贷款金额：</dt>
+							<dd>
+								{$detail.num}元
+							</dd>
+						</dl>
+						<dl>
+							<dt>月利率：</dt>
+							<dd>
+								{$detail.rate}%
+							</dd>
+						</dl>
+						<dl>
+							<dt>期限：</dt>
+							<dd>
+								{$detail.month}个月
+							</dd>
+						</dl>
+						<if condition="$detail.status eq 4 || $detail.status eq 5">
+							<dl>
+								<dt>已还期数：</dt>
+								<dd>
+									{$detail.paidmonth}期
+								</dd>
+							</dl>
+						</if>
+						<dl>
+							<dt>状态：</dt>
+							<dd>
+								<if condition="$detail.status eq 0">已拒绝
+									<elseif condition="$detail.status eq 1" />待审批
+									<elseif condition="$detail.status eq 2" />已通过
+									<elseif condition="$detail.status eq 3" />放款中
+									<elseif condition="$detail.status eq 4" />还款中
+									<elseif condition="$detail.status eq 5" />已完成<if condition="$detail.status eq 5 && $detail.isearlypay eq 1"><span style="color: red;">（提前还款）</span></if>
+								</if>
+							</dd>
+						</dl>
+						<if condition="$detail.status eq 0">
+							<dl>
+							<dt>拒绝理由：</dt>
+							<dd>
+								{$detail.reason}
+							</dd>
+						</dl>	
+						</if>
+						<!--<if condition="$detail.status eq 5 && $detail.isearlypay eq 1">
+							<dl>
+							<dt>提前还款金额：</dt>
+							<dd>
+								{$detail.earlypaynum}元
+							</dd>
+							<dl>
+							<dt>提前还款时间：</dt>
+							<dd>
+								{$detail.earlypaytime}
+							</dd>
+						</if>-->
+						</div>
+					</div>
+
+					<div class="div-container" style="margin-top: 20px;">
+						<div class="div-header">
+							<h2>时间节点</h2>
+						</div>
+						<div class="div-body">
+						
+						<dl>
+							<dt>申请时间：</dt>
+							<dd>
+								{$detail.applytime}
+							</dd>
+						</dl>
+						<if condition="$detail['checktime'] neq ''">
+							<dl>
+								<dt>审核时间：</dt>
+								<dd>
+									{$detail.checktime}
+								</dd>
+							</dl>
+						</if>
+						<if condition="$detail['flowtime'] neq ''">
+							<dl>
+								<dt>发起流程时间：</dt>
+								<dd>
+									{$detail.flowtime}
+								</dd>
+							</dl>
+						</if>
+						<if condition="$detail['flowendtime'] neq ''">
+							<dl>
+								<dt>放款时间：</dt>
+								<dd>
+									{$detail.flowendtime}
+								</dd>
+							</dl>
+						</if>
+						</div>
+					</div>
+					
+					<assign name="index" value="0" />
+					<if condition="$detail.status eq 4 || $detail.status eq 5">
+						<div class="div-container" style="margin-top: 20px;">
+							<div class="div-header">
+							<h2>还款信息</h2>
+						</div>
+							<table class="gridtable" width="100%">
+								<tr>
+									<th>期数</th>
+									<th>应还金额</th>
+									<th>剩余未还本金</th>
+									<th>应还日期</th>
+									<th>已还金额</th>
+									<th>还款时间</th>
+									<th>还款状态</th>
+									<th>操作</th>
+								</tr>
+								<foreach name='payDetail' item='vo'>
+								<tr data-id={$vo.id} data-amount={$vo.amount} data-unpaid={$vo.unpaid} data-applyid={$vo.applyid} data-islate={$vo.islate} data-lateamount={$vo.lateamount} <if condition="$vo.status eq 0">style='color:red'</if>>
+									<td>{$vo.month}</td>
+									<td>{$vo.amount}元</td>
+									<td>{$vo.unpaid}元</td>
+									<td>{$vo.topaytime}</td>
+									<td><if condition="$vo.status eq 1">{$vo.paid}元</if></td>
+									<td><if condition="$vo.status eq 1">{$vo.paytime}</if></td>
+									<td>
+										<if condition="$vo.status eq 0">未完成<assign name="index" value="$index+1" />
+											<elseif condition="$vo.status eq 1" />已完成</if>
+									</td>
+									<td>
+										<if condition="$vo.status eq 0 && $index eq 1">
+											<a class="btn_blue_b pay">线下还款</a>
+											<a class="btn_blue_b payAll">提前还款</a>
+										<elseif condition="$vo.status eq 0"/>
+											<a class="btn_gray_b" href="#">线下还款</a>
+										</if>
+									</td>	
+								</tr>
+								</foreach>
+							</table>
+					</if>
+					<div class="form_b">
+						<input type="button" onclick="goUrl('{:U('XedaiManage/index')}')" class="btn_gray_b" value="返 回">
+					</div>
+				</form>
+			</div>
+		</div>
+	<script>
+			//还款
+			$(".pay").on("click", function() {
+				tr = $(this).closest('tr');
+				$id = tr.attr("data-id");
+				$amount = tr.attr("data-amount");
+				$islate = tr.attr("data-islate");
+				$lateamount = tr.attr("data-lateamount");
+				
+				$amount = parseFloat($amount) + parseFloat($lateamount);
+				
+				$msg = "确定已收款"+$amount+"元吗？";
+				console.log($msg);
+				if($islate == 1) {
+					$msg = "需支付逾期金利息"+$lateamount+"元,确定已收款"+$amount+"元吗？";
+				}
+				layer.open({
+					type: 1,
+					title: false, //不显示标题栏
+					closeBtn: true,
+					area: '300px;',
+					shade: 0.8,
+					id: 'LAY_layuipro_accept', //设定一个id，防止重复弹出
+					resize: false,
+					btn: ['确定', '取消'],
+					btnAlign: 'c',
+					moveType: 1, //拖拽模式，0或者1
+					content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">'+$msg+'</div>',
+					success: function(layero) {
+						var btn = layero.find('.layui-layer-btn');
+						btn.find('.layui-layer-btn0').attr({
+							href: "{:U('XedaiManage/pay')}/id/"+$id
+						});
+					}
+				});
+			});
+			
+			//提前还款
+			$(".payAll").on("click", function() {
+				tr = $(this).closest('tr');
+				$applyId = tr.attr("data-applyid");
+				$unpaid = tr.attr("data-unpaid");
+				$islate = tr.attr("data-islate");
+				$lateamount = tr.attr("data-lateamount");
+				
+				$payamount = (parseFloat($unpaid)*1.03).toFixed(2);//待还
+				
+				$payamount = parseFloat($payamount) + parseFloat($lateamount);
+				
+				$msg = "提前还款需额外支付剩余本金的3%，当前本金为"+$unpaid+"元，确定已收款"+$payamount+"吗？";
+				if($islate == 1) {
+					$msg = "需支付逾期金利息"+$lateamount+"元，"+$msg;
+				}
+				
+				layer.open({
+					type: 1,
+					title: false, //不显示标题栏
+					closeBtn: true,
+					area: '300px;',
+					shade: 0.8,
+					id: 'LAY_layuipro_accept', //设定一个id，防止重复弹出
+					resize: false,
+					btn: ['确定', '取消'],
+					btnAlign: 'c',
+					moveType: 1, //拖拽模式，0或者1
+					content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">'+$msg+'</div>',
+					success: function(layero) {
+						var btn = layero.find('.layui-layer-btn');
+						btn.find('.layui-layer-btn0').attr({
+							href: "{:U('XedaiManage/payAll')}/amount/"+$payamount+"/applyId/"+$applyId
+						});
+					}
+				});
+			});
+	</script>
+	</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title></title>
+    <link rel="stylesheet" href="__PUBLIC__/css/style.css">
+    <script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+    <script src="__PUBLIC__/js/common.js"></script>
+    <script>
+        function doSearch() {
+            var strCode = $("#txtCode").val();
+            if (strCode == "") {
+                alert("请输入兑换码");
+                return;
+            }
+            goUrl("{:U('Zcjscode/detail')}/code/"+strCode);
+        }
+    </script>
+</head>
+<body>
+
+<div class="main">
+    <div class="pos">兑换码列表</div>
+    <div class="operate">
+        <div class="left">
+            <form method="post" action="{:U('Zcjscode/expCode')}">
+                <input type="submit"  class="btn_blue" value="导出数据">
+            </form>
+        </div>
+    </div>
+    <div class="operate">
+        <div class="left">
+            <input type="text" id="txtCode" title="兑换码" class="inp_default" placeholder="兑换码">
+            <input type="button" class="btn_blue" value="查  询" onclick="doSearch()">
+        </div>
+    </div>
+    <div class="list">
+        <table width="100%">
+            <tr>
+                <th>编号</th>
+                <th>商家名称</th>
+                <th>兑换码</th>
+                <th>手机号</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            <foreach name='list' item='vo'>
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.name}</td>
+                <td>{$vo.code}</td>
+                <td>{$vo.phone}</td>
+                <td>
+                    <if condition="$vo['state'] eq 0">
+                    未使用
+                    <else />
+                    已兑换
+                    </if>
+                </td>
+                <td>
+                    <a href="{:U('Zcjscode/detail',array('code'=>$vo['code']),'')}">详情</a>
+                    <if condition="$vo['state'] eq 0">
+                    <a href="{:U('Zcjscode/exchange',array('code'=>$vo['code']),'')}">兑换</a>
+                    <else />
+                    兑换
+                    </if>
+                </td>
+            </tr>
+            </foreach>
+        </table>
+        <div class="page">{$page}</div>
+    </div>
+</div>
+
+</body>
+</html>

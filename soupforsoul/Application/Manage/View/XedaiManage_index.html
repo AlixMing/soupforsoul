@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<title></title>
+		<link rel="stylesheet" href="__PUBLIC__/css/style.css">
+		<link rel="stylesheet" href="__PUBLIC__/css/daterangepicker.css">
+		<script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+		<script src="__PUBLIC__/js/common.js"></script>
+		<script src="__PUBLIC__/js/layer/layer.js"></script>
+		<script src="__PUBLIC__/js/moment.min.js"></script>
+		<script src="__PUBLIC__/js/daterangepicker.min.js"></script>
+	</head>
+
+	<body>
+		<div class="main">
+			<div class="pos">审批列表</div>
+			<div class="operate">
+				<div class="left">
+					<div class="left_pad">
+						<form method="post" action="{:U('XedaiManage/index')}">
+							<input type="text" class="input" id="other" name="other" placeholder="人员名称/工号/手机号" <if condition="$other neq ''">value="{$other}"</if></input>
+							<label class="label">状态：</label>
+							<select name="status" id="status" class="input">
+								<option value="-1" <if condition="$status eq -1">selected</if>>所有状态</option>
+								<option value="0" <if condition="$status eq 0">selected</if>>已拒绝</option>
+								<option value="1" <if condition="$status eq 1">selected</if>>申请中</option>
+								<option value="2" <if condition="$status eq 2">selected</if>>本地审核中</option>
+								<option value="6" <if condition="$status eq 2">selected</if>>会签审核中</option>
+								<option value="3" <if condition="$status eq 3">selected</if>>放款中</option>
+								<option value="4" <if condition="$status eq 4">selected</if>>还款中</option>
+								<option value="5" <if condition="$status eq 5">selected</if>>已完成</option>
+							</select>
+							<label class="label">申请日期：</label>
+							<input type="text" class="form-control date-picker input" id="dateTimeRange" <if condition="$beginTime eq ''">value=""
+							<else/>value="{$beginTime} 至 {$endTime}"</if>/>
+							<span class="input-group-addon"><i class="fa fa-calendar bigger-110"></i></span>
+							<input type="hidden" name="beginTime" id="beginTime" value="{$beginTime}" />
+							<input type="hidden" name="endTime" id="endTime" value="{$endTime}" />
+							<a href="javascript:;" onclick="begin_end_time_clear();">清除</a>
+							<input type="submit" class="btn_blue_b" value="查  询">
+						</form>
+					</div>
+				</div>
+				<div class="right">
+					<form method="post" action="{:U('XedaiManage/expCode')}">
+						<input type="button" class="btn_blue_b" id="export" value="导出数据">
+					</form>
+				</div>
+			</div>
+			<div class="list">
+				<span style="color: red;">总{$count}条数据，其中通过{$accept}条，拒绝{$refuse}条</span>
+			</div>
+			<div class="list">
+				<table width="100%">
+					<tr>
+						<th>序号</th>
+						<th>申请人</th>
+						<!--
+                        	<th>贷款额度（元）</th>
+                        -->
+						<th>贷款金额/元</th>
+						<th>期限</th>
+						<th>月利率/%</th>
+						<th>还款方式</th>
+						<th>申请时间</th>
+						<!--<th>签约时间</th>-->
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+					<foreach name='vlist' item='vo'>
+						<tr data-id={$vo.id} data-rate={$vo.rate} data-num={$vo.num}>
+							<td>{$rownum+$key+1}</td>
+							<td>{$vo.name}</td>
+							<!--
+                            	<td>{$vo.limitnum}</td>
+                            -->
+							<td class='num'>{$vo.num}</td>
+							<td>{$vo.month}个月</td>
+							<td class='rate'>{$vo.rate}</td>
+							<td>
+								<if condition="$vo.paytype eq 1"><span style="color:cadetblue">先息后本</span>
+									<else/><span style="color:chocolate">等额本息</span></if>
+							</td>
+							<td>{$vo.applytime}</td>
+							<!--<td>
+								<notempty name="$vo.signtime">
+									{$vo.signtime}
+								</notempty>
+							</td>-->
+							<td>
+								<if condition="$vo.status eq 0"><span>已拒绝</span>
+									<elseif condition="$vo.status eq 1" /><span style="color:brown">申请中</span>
+									<elseif condition="$vo.status eq 2" /><span style="color:green">本地已通过</span>
+									<elseif condition="$vo.status eq 6" /><span style="color:green">会签审核中</span>
+									<elseif condition="$vo.status eq 3" /><span style="color:orange">放款中</span>
+									<elseif condition="$vo.status eq 4" /><span style="color:aqua">还款中</span>
+									<if condition="$vo.paystatus eq 1"><span style="color:red;">(已逾期)</span></if>
+									<elseif condition="$vo.status eq 5" /><span style="color:darkgoldenrod">已完成</span>
+								</if>
+							</td>
+							<td>
+								<if condition="$vo.status eq 1">
+									<a class="btn_gray_b" href="{:U('XedaiManage/check',array('id' => $vo['id']))}">查看</a>
+									<a class="btn_blue_b infoChange" href="#">基数调整</a>
+									<a class="btn_orange_b refuse">拒绝</a>
+									<a class="btn_green_b accept">本地通过</a>
+								<elseif condition="$vo.status eq 0" />
+									<a class="btn_gray_b" href="{:U('XedaiManage/check',array('id' => $vo['id']))}">查看</a>
+								<elseif condition="$vo.status eq 2" />
+									<a class="btn_gray_b" href="{:U('XedaiManage/check',array('id' => $vo['id']))}">查看</a>
+									<a class="btn_blue_b" href="{:U('XedaiManage/exportWord',array('id' => $vo['id']))}">合同下载</a>
+									<a class="btn_green_b flow">发起流程</a>
+								<elseif condition="$vo.status eq 3 || $vo.status eq 4 || $vo.status eq 5 || $vo.status eq 6" />
+									<a class="btn_gray_b" href="{:U('XedaiManage/check',array('id' => $vo['id']))}">查看</a>
+								</if>
+							</td>
+						</tr>
+					</foreach>
+				</table>
+				<div class="page">{$page}</div>
+			</div>
+		</div>
+		<script>
+			$(function() {
+				$('#dateTimeRange').daterangepicker({
+						applyClass: 'btn-sm btn-success',
+						cancelClass: 'btn-sm btn-default',
+						locale: {
+							applyLabel: '确认',
+							cancelLabel: '取消',
+							fromLabel: '起始时间',
+							toLabel: '结束时间',
+							customRangeLabel: '自定义',
+							firstDay: 1
+						},
+						ranges: {
+							//'最近1小时': [moment().subtract('hours',1), moment()],
+							'今日': [moment().startOf('day'), moment()],
+							'昨日': [moment().subtract('days', 1).startOf('day'), moment().subtract('days', 1).endOf('day')],
+							'最近7日': [moment().subtract('days', 6), moment()],
+							'最近30日': [moment().subtract('days', 29), moment()],
+							'本月': [moment().startOf("month"), moment().endOf("month")],
+							'上个月': [moment().subtract(1, "month").startOf("month"), moment().subtract(1, "month").endOf("month")]
+						},
+						opens: 'right', // 日期选择框的弹出位置
+						separator: ' 至 ',
+						showWeekNumbers: true, // 是否显示第几周
+
+						//timePicker: true,
+						//timePickerIncrement : 10, // 时间的增量，单位为分钟
+						//timePicker12Hour : false, // 是否使用12小时制来显示时间
+
+						//maxDate : moment(),           // 最大时间
+						format: 'YYYY-MM-DD'
+
+					}, function(start, end, label) { // 格式化日期显示框
+						$('#beginTime').val(start.format('YYYY-MM-DD'));
+						$('#endTime').val(end.format('YYYY-MM-DD'));
+					})
+					.next().on('click', function() {
+						$(this).prev().focus();
+					});
+
+				$(".dropdown-menu").hide(); //初始化不显示
+			});
+
+			/**
+			 * 清除时间
+			 */
+			function begin_end_time_clear() {
+				$('#dateTimeRange').val('');
+				$('#beginTime').val('');
+				$('#endTime').val('');
+			}
+
+			$('#export').on('click', function() {
+				$status = $("#status").val();
+				$beginTime = $('#beginTime').val();
+				$endTime = $('#endTime').val();
+				$other = $('#other').val();
+				window.open("{:U('XedaiManage/expCode')}/status/" + $status + "/beginTime/" + $beginTime + "/endTime/" + $endTime + "/other/" + $other);
+			});
+			
+			//基础信息修改
+			function updateInfo() {
+				
+				id = $("#changeId").val();
+				rate = $("#changeRate").val();
+				num = $("#changeNum").val();
+				if(isNaN(parseFloat(rate)) || isNaN(parseInt(num))) {
+					layer.msg('贷款金额必须为整数，利率必须为整数或小数', {
+						time: 1000, //1s后自动关闭
+					});
+				} else if(parseFloat(rate) <= 0 || parseFloat(rate) >= 1 || parseFloat(num) <= 0) {
+					layer.msg('金额必须大于0，利率必须为大于0且小于1', {
+						time: 1000, //1s后自动关闭
+					});
+				} else {
+					layer.closeAll();
+					$.ajax({
+					    url: "{:U('XedaiManage/infoChange')}",
+					    type:'post',
+					    data: {'id':id, 'rate':rate, 'num':num},
+					    success:function(json){   
+					    	layer.msg(json.msg, {
+								time: 1000, //1s后自动关闭
+							});
+							setTimeout("window.location.reload()", 1000 );
+					    }
+					});
+				}
+			}
+
+			$('.infoChange').on('click', function() {
+				tr = $(this).closest('tr');
+				id = tr.attr("data-id");
+				rate = tr.attr("data-rate");
+				num = tr.attr("data-num");
+
+				layer.open({
+					type: 1, //Page层类型
+					area: ['400px', '200px'],
+					title: '基数调整',
+					shade: 0.6, //遮罩透明度
+					maxmin: false, //允许全屏最小化
+					closeBtn: false,
+					anim: 1, //0-6的动画形式，-1不开启
+					shadeClose: true, //点击遮罩关闭
+					content: "<div>" +
+						"<input type='hidden' name='id' value='" + id + "' id='changeId'/>" +
+						"<input type='hidden' name='num' value='" + num + "' id='changeNum'/>" +
+						"<div style='text-align:center;padding-top:10px;'></br>" +
+						//"<label class='label'>贷款金额：</label><input class='input' type='text' name='num' value='" + num + "' id='changeNum'/><label class='label'>元</label></br></br>" +
+						"<label class='label'>利率：</label><input class='input' type='text' name='rate' value='" + rate + "' id='changeRate'/><label class='label'>%</label></br>" +
+						"<button style='margin-top:5%;' type='button' class='btn_blue_b' onclick='updateInfo()'>确定修改</button></div>"
+				});
+			});
+
+			//通过2
+			$(".accept").on("click", function() {
+				tr = $(this).closest('tr');
+				$id = tr.attr("data-id");
+
+				layer.open({
+					type: 1,
+					title: false, //不显示标题栏
+					closeBtn: true,
+					area: '300px;',
+					shade: 0.8,
+					id: 'LAY_layuipro_accept', //设定一个id，防止重复弹出
+					resize: false,
+					btn: ['确定', '取消'],
+					btnAlign: 'c',
+					moveType: 1, //拖拽模式，0或者1
+					content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">确定通过吗？</div>',
+					success: function(layero) {
+						var btn = layero.find('.layui-layer-btn');
+						btn.find('.layui-layer-btn0').attr({
+							href: "{:U('XedaiManage/edit')}/status/2/id/" + $id
+						});
+					}
+				});
+			});
+			
+			//拒绝
+			function refuse() {
+				id = $("#changeId").val();
+				reason = $("#reason").val();
+				if(!reason) {
+					layer.msg('拒绝理由不能为空', {
+						time: 1000, //1s后自动关闭
+					});
+				} else {
+					goUrl("{:U('XedaiManage/edit')}/id/" + id + "/status/0/reason/" + reason);
+					layer.closeAll();
+				}
+			}
+
+			//拒绝0
+			$(".refuse").on("click", function() {
+				tr = $(this).closest('tr');
+				$id = tr.attr("data-id");
+				layer.closeAll();
+				
+				layer.open({
+					type: 1, //Page层类型
+					area: ['400px', '200px'],
+					title: '拒绝原因',
+					shade: 0.6, //遮罩透明度
+					maxmin: false, //允许全屏最小化
+					closeBtn: false,
+					anim: 1, //0-6的动画形式，-1不开启
+					shadeClose: true, //点击遮罩关闭
+					content: "<div>" +
+						"<input type='hidden' name='id' value='" + $id + "' id='changeId'/>" +
+						"<div style='text-align:center;padding-top:10px;'></br>" +
+						"<label class='label'>拒绝原因：</label><input class='input' type='text' name='reason' value='' id='reason'/></br></br>" +
+						"<button style='margin-top:5%;' type='button' class='btn_blue_b' onclick='refuse()'>确定拒绝</button></div>"
+				});
+			});
+			
+			//发起流程
+			function flow() {
+				id = $("#flowId").val();
+				worknum = $("#worknum").val();
+				if(!worknum) {
+					layer.msg('工号不能为空', {
+						time: 1000, //1s后自动关闭
+					});
+				} else {
+					layer.closeAll();
+					$.ajax({
+					    url: "{:U('XedaiManage/flow')}",
+					    type:'post',
+					    data: {'id':id, 'worknum':worknum},
+					    success:function(json){   
+					    	layer.msg(json.msg, {
+								time: 1000, //1s后自动关闭
+							});
+							setTimeout("window.location.reload();", 1000 );
+					    }
+					});
+				}
+			}
+
+			//发起流程
+			$(".flow").on("click", function() {
+				tr = $(this).closest('tr');
+				$id = tr.attr("data-id");
+
+				layer.open({
+					type: 1, //Page层类型
+					area: ['400px', '200px'],
+					title: '发起人工号',
+					shade: 0.6, //遮罩透明度
+					maxmin: false, //允许全屏最小化
+					closeBtn: false,
+					anim: 1, //0-6的动画形式，-1不开启
+					shadeClose: true, //点击遮罩关闭
+					content: "<div>" +
+						"<input type='hidden' value='" + $id + "' id='flowId'/>" +
+						"<div style='text-align:center;padding-top:10px;'></br>" +
+						"<label class='label'>请输入您的工号：</label><input class='input' type='text' name='worknum' value='' id='worknum'/></br></br>" +
+						"<button style='margin-top:5%;' type='button' class='btn_blue_b' onclick='flow()'>确定</button></div>"
+				});
+			});
+
+		</script>
+	</body>
+
+</html>

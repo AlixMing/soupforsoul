@@ -1,0 +1,17 @@
+@charset "utf-8";
+/* 后台登录页面样式 */
+*{padding:0; margin:0;}
+body{background:#f7f7f7;font-size:12px;}
+#login{width:489px;height:311px;background:url(../image/zcjs/login_bg.gif) no-repeat; position:absolute; top:50%;left:50%;
+    margin:-155px 0 0 -244px;}
+h1{height:85px;width:247px;background:url(../image/zcjs/login_logo.png) no-repeat;margin:37px auto 0 ;}
+form {width:375px; height:90px; margin:0 auto; padding:0 0 25px; position:relative}
+input { outline: none;}
+.item{width:265px;float:left; text-align:left;color:#666666; margin-top:18px;}
+.input{border:1px #d2d2d2 solid;padding:5px 5px 0; float:right;line-height:21px; height:21px;background:url(../image/zcjs/inputbg.gif);width:176px;}
+.input input{border-width: 0;width:150px;height:18px;margin-left:8px;_margin-left:5px;}
+label{line-height:28px; font-weight:bold;}
+.icon{width:12px;height:18px; overflow:hidden;float:left;background:url(../image/zcjs/login_name.gif) 0 2px no-repeat}
+.icon2{width:12px;height:18px; float:left;background:url(../image/zcjs/login_password.gif) no-repeat}
+.submit{width:83px;height:75px;border:0;cursor:pointer; position:absolute; top:17px; right:0;background:url(../image/zcjs/login_submit.gif); float:right;}
+.copyright{color:#aaaaaa;font-family:Arial,Helvetica,sans-serif; text-align:center; margin-top:32px;}

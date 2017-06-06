@@ -1,0 +1,91 @@
+
+body {
+    background-color: #EA3B36;
+}
+
+.img-area img {
+    width: 100%;
+}
+
+.notice-area {
+    position: relative;
+    margin: 20px 0 40px;
+}
+
+.notice-area img {
+    width: 95%;
+    margin: 0 auto;
+}
+
+.notice-area .title {
+    position: absolute;
+    top: 38%;
+    left: 8%;
+    right: 8%;
+    display: box;
+    display: -webkit-box;
+    display: -moz-box;
+    color: #2d908d;
+}
+
+.notice-area .title .cell {
+    position: relative;
+    box-flex: 1;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    padding: 5px 0;
+    width: 33%;
+    text-align: center;
+    list-style: none;
+}
+
+.notice-area .content {
+    position: absolute;
+    top: 48%;
+    left: 8%;
+    right: 8%;
+    bottom: 8%;
+}
+
+.notice-area .marquee {
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+.notice-area .marquee ul li {
+    float:left;
+    width: 100%;
+}
+
+.notice-area .marquee ul li div {
+    display: inline-block;
+    width: 33%;
+    text-align: center;
+    line-height: 30px;
+}
+
+.go-area img {
+    width: 60%;
+    margin: 0 auto 30px;
+}
+
+.flow-area .title {
+    width: 100%;
+    margin: 0 auto 20px;
+}
+
+.flow-area .content {
+    width: 80%;
+    margin: 0 auto 30px;
+}
+
+.rule-area .title {
+    width: 100%;
+    margin: 0 auto 20px;
+}
+
+.rule-area .content {
+    width: 80%;
+    margin: 0 auto 30px;
+}

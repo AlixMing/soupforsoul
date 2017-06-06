@@ -1,0 +1,220 @@
+
+body {
+    background-color: #EF0000;
+}
+
+.bg-area img {
+    width: 100%;
+}
+
+.id-area {
+    position: absolute;
+    top: 50.6%;
+    left: 9%;
+    right: 9%;
+    height: 6.6%;
+}
+
+.tips-area {
+    position: absolute;
+    top: 57%;
+    left: 9%;
+    right: 9%;
+    color: #feda6c;
+    display: none;
+}
+
+.pwd-area {
+    position: absolute;
+    top: 60.2%;
+    left: 9%;
+    right: 9%;
+    height: 6.6%;
+}
+
+.code-area {
+    position: absolute;
+    top: 69.8%;
+    left: 9%;
+    right: 9%;
+    height: 6.6%;
+}
+
+.txt-area {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    border: solid 2px #9c160f;
+    border-radius: 5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+}
+
+.txt-area .icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 14%;
+    padding: 8px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+}
+
+.txt-area .icon img {
+    width: 100%;
+}
+
+.txt-area .txt {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 86%;
+}
+
+.txt-area .txt input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.txt-area {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    border: solid 2px #9c160f;
+    border-radius: 5px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+}
+
+.txt-area .icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 14%;
+    padding: 8px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+}
+
+.txt-area .icon img {
+    width: 100%;
+}
+
+.txt-area .txt {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 86%;
+}
+
+.txt-area .txt input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: none;
+    outline: none;
+}
+
+.code-area .left {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 48%;
+}
+
+.code-area .right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 48%;
+}
+
+.code-area .left .txt-area .icon {
+    width: 27%;
+}
+
+.code-area .left .txt-area .txt {
+    width: 73%;
+}
+
+.code-area .right input {
+    background: url(../image/liumi/btn-code.png) no-repeat;
+    background-size: 100% 100%;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    color: #2a0904;
+    font-weight: bold;
+}
+
+.register-area {
+    position: absolute;
+    top: 84.3%;
+    left: 9%;
+    right: 9%;
+}
+
+.register-area img {
+    width: 100%;
+}
+
+.rule-area {
+    position: absolute;
+    top: 79.1%;
+    left: 9%;
+    right: 9%;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.rule-area a {
+    color: #00f0ff;
+    text-decoration: none;
+}
+
+.chk-rule {
+    display: none;
+}
+
+.chk-rule + label {
+    display: inline-block;
+    vertical-align: text-bottom;
+    width: 14px;
+    height: 14px;
+    background: url(../image/liumi/chk-no.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+.chk-rule:checked + label {
+    background: url(../image/liumi/chk-yes.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+

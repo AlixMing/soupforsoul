@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<title></title>
+		<link rel="stylesheet" href="__PUBLIC__/css/style.css">
+		<script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+		<script src="__PUBLIC__/js/common.js"></script>
+		<script src="__PUBLIC__/js/layer/layer.js"></script>
+	</head>
+	<body>
+		<div class="main">
+			<div class="pos">用户列表</div>
+			<div class="operate">
+				<div class="left">
+					<div class="left_pad">
+						<form method="post" action="{:U('XedaiUser/index')}">
+							<input type="text" class="input" name="other" placeholder="人员名称或工号"></input>
+							<input type="submit" class="btn_blue_b" value="查  询">
+						</form>
+					</div>
+				</div>
+				<div class="right">
+					<form action="{:U('XedaiUser/upload')}" method="post" enctype="multipart/form-data">
+						<input type="file" name="excelData" class="inp_default input">
+						<input type="submit" class="btn_blue_b" value="导入用户">
+						<input type="button" class="btn_gray_b download" value="模板下载">
+					</form>
+				</div>
+			</div>
+			<div class="list">
+				<table width="100%">
+					<tr>
+						<th>序号</th>
+						<th>工号</th>
+						<th>姓名</th>
+						<th>状态</th>
+						<th>授信额度/元</th>
+						<th>剩余额度/元</th>
+						<th>操作</th>
+					</tr>
+					<foreach name='vlist' item='vo'>
+						<tr data-id={$vo.id} data-surplusmoney={$vo.surplusmoney} data-xcredit={$vo.xcredit}>
+							<td>{$rownum+$key+1}</td>
+							<td>{$vo.xnumber}</td>
+							<td>{$vo.xname}</td>
+							<td>
+								<if condition="$vo.status eq 0">冻结
+									<else/>正常
+								</if>
+							</td>
+							<td class='xcredit'>
+								<if condition="$vo.xcredit neq ''">
+									{$vo.xcredit}
+								<elseif condition="$vo.maxincome eq -1"/>无限制
+								<else/>{$vo['xincome']*15000}+入职天数50倍（不高于{$vo['maxincome']*10000}）
+								</if>
+							</td>
+							<td class='surplusmoney'>
+								<if condition="$vo.surplusmoney neq 0">
+									{$vo.surplusmoney}
+								<elseif condition="$vo.maxincome eq -1"/>无限制
+								<else/>{$vo['xincome']*15000}+入职天数50倍（不高于{$vo['maxincome']*10000}）
+								</if>
+							</td>
+							<td>
+								<if condition="$vo.status eq 1">
+									<a class="btn_orange_b refuse">冻结</a>
+								<elseif condition="$vo.status eq 0" />
+									<a class="btn_green_b accept">激活</a>
+								</if>
+								<a class="btn_blue_b infoChange">修改额度</a>
+							</td>
+						</tr>
+					</foreach>
+				</table>
+				<div class="page">{$page}</div>
+			</div>
+		</div>
+		<script>
+			//下载模板
+			$(".download").on("click", function(){
+				window.open("demo.xlsx");
+			})
+			//激活1
+			$(".accept").on("click", function() {
+				tr = $(this).closest('tr');
+				$id = tr.attr("data-id");
+
+				layer.open({
+					type: 1,
+					title: false, //不显示标题栏
+					closeBtn: true,
+					area: '300px;',
+					shade: 0.8,
+					id: 'LAY_layuipro_accept', //设定一个id，防止重复弹出
+					resize: false,
+					btn: ['确定', '取消'],
+					btnAlign: 'c',
+					moveType: 1, //拖拽模式，0或者1
+					content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">确定激活该用户吗？</div>',
+					success: function(layero) {
+						var btn = layero.find('.layui-layer-btn');
+						btn.find('.layui-layer-btn0').attr({
+							href: "{:U('XedaiUser/edit')}/status/1/id/" + $id
+						});
+					}
+				});
+			});
+
+			//冻结0
+			$(".refuse").on("click", function() {
+				tr = $(this).closest('tr');
+				$id = tr.attr("data-id");
+
+				layer.open({
+					type: 1,
+					title: false, //不显示标题栏
+					closeBtn: true,
+					area: '300px;',
+					shade: 0.8,
+					id: 'LAY_layuipro_refuse', //设定一个id，防止重复弹出
+					resize: false,
+					btn: ['确定', '取消'],
+					btnAlign: 'c',
+					moveType: 1, //拖拽模式，0或者1
+					content: '<div style="padding: 50px; line-height: 22px; background-color: #393D49; color: #fff; font-weight: 300;">确定冻结该用户吗？</div>',
+					success: function(layero) {
+						var btn = layero.find('.layui-layer-btn');
+						btn.find('.layui-layer-btn0').attr({
+							href: "{:U('XedaiUser/edit')}/status/0/id/" + $id
+						});
+					}
+				});
+			});
+			
+			//额度修改
+			$('.infoChange').on('click', function() {
+				tr = $(this).closest('tr');
+				id = tr.attr("data-id");
+				xcredit = tr.attr("data-xcredit");
+				console.log(xcredit);
+				layer.open({
+					type: 1, //Page层类型
+					area: ['400px', '200px'],
+					title: '额度调整',
+					shade: 0.6, //遮罩透明度
+					maxmin: false, //允许全屏最小化
+					closeBtn: false,
+					anim: 1, //0-6的动画形式，-1不开启
+					shadeClose: true, //点击遮罩关闭
+					content: "<div>" +
+						"<input type='hidden' name='id' value='" + id + "' id='changeId'/>" +
+						"<div style='text-align:center;padding-top:10px;'></br>" +
+						"<label>授信额度（元）：</label><input type='text' name='xcredit' value='" + xcredit + "' id='changeXcredit'/></br></br>" +
+						"<button style='margin-top:5%;' type='button' class='btn btn-block btn-success btn-lg' onclick='updateInfo()'>确定修改</button></div>"
+				});
+			});
+			
+			function updateInfo() {
+				id = $("#changeId").val();
+				xcredit = $("#changeXcredit").val();
+				
+				tr = $("tr[data-id='" + id + "']");
+				oldXcredit = tr.attr("data-xcredit");
+				oldsurplusmoney = tr.attr("data-surplusmoney");
+				if (!oldXcredit) {
+					newsurplusmoney = xcredit;
+				} else {
+					newsurplusmoney = parseFloat(oldsurplusmoney) + parseFloat(xcredit) - parseFloat(oldXcredit);
+				}
+				
+				if(isNaN(parseInt(xcredit))) {
+					layer.msg('贷款金额必须为整数', {
+						time: 1000, //1s后自动关闭
+					});
+				} else if(parseFloat(xcredit) <= 0) {
+					layer.msg('金额必须大于0', {
+						time: 1000, //1s后自动关闭
+					});
+				} else {
+					$.ajax({
+						type: "post",
+						url: "{:U('XedaiUser/infoChange')}",
+						dataType: 'json',
+						data: {
+							"id": id,
+							"xcredit": xcredit
+						},
+						success: function(data) {
+							var updateSuccess = data.status;
+							if(updateSuccess == 1) {
+								layer.msg('修改成功', {
+									time: 1000, //1s后自动关闭
+								});
+								$("tr[data-id='" + id + "']").attr("data-xcredit", xcredit);
+								$("tr[data-id='" + id + "']").find(".xcredit").html(xcredit);
+								$("tr[data-id='" + id + "']").attr("data-surplusmoney", newsurplusmoney);
+								$("tr[data-id='" + id + "']").find(".surplusmoney").html(newsurplusmoney);
+							} else {
+								layer.msg('修改失败', {
+									time: 1000, //1s后自动关闭
+								});
+							}
+						}
+					});
+					layer.closeAll();
+				}
+			}
+		</script>
+	</body>
+
+</html>

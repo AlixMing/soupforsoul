@@ -1,0 +1,161 @@
+
+
+
+body { padding-top: 50px; }
+.pull-right>li>a { display:inline-block !important; }
+
+
+#sideBar { margin-top:20px; }
+#sideBar li.main-menu > a { cursor:pointer; }
+#sideBar .sub-menu { border:1px solid #ddd; border-top:0px none; }
+#sideBar .sub-menu li { line-height:24px !important; }
+#sideBar .sub-menu li.menu_curr a { background-color:#f5f5f5 !important; border:0 none !important; }
+#sideBar .sub-menu li a { text-indent:15px; border-bottom:1px dashed #eee; }
+
+
+.roleFilter { }
+.roleFilter a { vertical-align: baseline !important; margin-bottom:6px; }
+.roleFilter>table { margin-bottom:0px; }
+
+
+.pageTit div.opt { float:right; position:relative; top:-20px; }
+.pageTit div.opt a { margin-left:5px;}
+
+
+.dataBox table.center td, .dataBox table.center th { text-align:center; }
+
+
+.dataBox table .opt td { background-color:#fff !important; }
+
+
+.dataBox table td.data-op-list { text-align:left; }
+
+
+.pages .total { float:left; }
+
+
+i.important { color: #E60012;font-size: 16px;font-family: Verdana, Geneva, sans-serif;display: inline-block;height: 18px;line-height: 23px;overflow: hidden;vertical-align: middle; }
+
+
+.the-icons {
+  margin-left: 0;
+  list-style: none;
+}
+.the-icons li {
+  float: left;
+  width: 25%;
+  line-height: 25px;
+}
+.the-icons i:hover {
+  background-color: rgba(255,0,0,.25);
+}
+
+
+.table-admin-menu { border-collapse:collapse; border-spacing:0; width:100%; border:1px solid #ddd; border-right:none; }
+.table-admin-menu th { background:#eee; border-bottom:2px solid #ddd; border-right:1px solid #ddd;}
+.table-admin-menu td { padding:5px; border-right:1px solid #ddd; border-top:0;}
+.table-admin-menu tr:hover { background:#eee}
+.table-admin-menu .even { background:rgba(245, 245, 245, 0.6);}
+
+.nav-tabs > li > a { padding-left:6px; padding-right:6px; }
+
+#sideBar { margin-top:20px; }
+#sideBar li.main-menu > a { cursor:pointer; }
+#sideBar .sub-menu { border:1px solid #ddd; border-top:0px none; }
+#sideBar .sub-menu li { line-height:24px !important; }
+#sideBar .sub-menu li.menu_curr a { background-color:#f5f5f5 !important; border:0 none !important; }
+#sideBar .sub-menu li a { text-indent:15px; border-bottom:1px dashed #eee; }
+
+
+.message { height:70px;}
+
+#footer { text-align:center; padding:10px 20px 20px; border-top:1px solid #DDD; }
+
+
+
+
+
+.td30 { width:30px; }
+.td60 { width:60px; }
+.clearfix:before,.clearfix:after { content:""; display:table; }
+.clearfix:after { clear:both; }
+.clearfix { zoom:1; }
+.clear { clear:both; height:0; width:0; display:block; visibility:hidden; overflow:hidden; }
+.clearit { clear:both; zoom:1; }
+.hidden { display:none; }
+.vhidden { visibility:hidden; }
+.left { float:left; display:inline; }
+.right { float:right; display:inline; }
+.fnone { float:none; }
+.txtleft{ text-align:left !important; }
+.txtright{ text-align:right; }
+.txtcenter{ text-align:center; }
+.middle { vertical-align:middle !important; }
+.noborder{ border:0 none !important; }
+.sub{ vertical-align:sub; }
+.sup{ vertical-align:sup; }
+.cursor { cursor:pointer; }
+.zoom { zoom:1; }
+.vtop { vertical-align:top; }
+
+.red { color:#f00; }
+.orange { color:#ffa500; }
+.yellow { color:#ff0; }
+.green { color:#080; }
+.blue { color:#00f; }
+.dark-gray { color:#333; }
+.gray { color:#666; }
+.black { color:#000; }
+.light-gray { color:#999; }
+.an-ccc { color:#ccc; }
+.mb10 { margin-bottom:10px; }
+.ml10 { margin-left:10px; }
+.mr10 { margin-right:10px; }
+.mr5 { margin-right:5px !important; }
+
+#uploaderQueue { margin-top:16px; width:745px; height:200px; padding:10px; border:1px solid #7F9DB9; overflow:auto; }
+#uploaderQueue table { width:100%; }
+#uploaderQueue table td { height:24px; border-bottom:1px dotted #ccc; }
+#uploaderQueue table td .delete { display:block; text-indent:-9999px; width:16px; height:16px; background:url("http://yz.app.socialjia.com/GoodaymartService/rrswsq/js/images/admin/uploadDelete.gif") no-repeat center center; }
+#btnContainer { height:30px; position:relative; overflow:hidden; }
+#btnClear { position:absolute; left:134px; top:0; width:120px; height:30px; background:url("http://yz.app.socialjia.com/GoodaymartService/rrswsq/js/images/admin/btnClear.png") no-repeat left top; border:0 none; }
+#btnClear:hover { background-position:0% 100%; }
+.btnClear { background-position:0% 0% !important; }
+.btnClear:hover { background-position:0% 0% !important; }
+
+ul.holder li.bit-box, #apple-list ul.holder li.bit-box { padding-right: 15px; position: relative; z-index:1000;}
+
+.cursorL { cursor:url("http://img1.cache.netease.com/cnews/img/gallery11/bg11.cur"), auto; }
+.cursorR { cursor:url("http://img1.cache.netease.com/cnews/img/gallery11/bg12.cur"), auto; }
+.photo-show { padding:30px 0; text-align:center; background:#f7f7f7; width:712px; height:503px; overflow:hidden;}
+.wide {width:550px;}
+
+#dataBox .table-admin-menu { border-collapse:collapse; border-spacing:0; width:100%; border:1px solid #ddd; border-right:none; }
+#dataBox th { background:#eee; border-bottom:2px solid #ddd; border-right:1px solid #ddd;}
+#dataBox td { padding:5px; border-right:1px solid #ddd; border-top:0;}
+#dataBox tr:hover { background:#eee}
+#dataBox .even { background:rgba(245, 245, 245, 0.6);}
+.table-striped tbody tr:nth-child(odd) td,
+.table-striped tbody tr:nth-child(odd) th {
+  background-color: #f9f9f9;
+}
+
+
+
+.service-online-status-1 {
+  background-color: #5bb75b;
+}
+.service-online-status-5 {
+  background-color: #da4f49;
+}
+.service-online-status-10 {
+  background-color: #414141;
+}
+
+#onlineStatusBox  .dropdown-menu {
+  background-color: #white;
+}
+
+.on-wall {
+  
+}

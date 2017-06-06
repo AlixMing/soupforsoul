@@ -1,0 +1,196 @@
+
+body{
+	background: #ffd236;
+}
+
+.X-top img{
+	width: 100%;
+}
+
+.X-content,.X-main{
+	background:#ffba00; /* 一些不支持背景渐变的浏览器 */  
+    background:-moz-linear-gradient(top, #ffba00, #ffd236);  
+    background:-webkit-gradient(linear, 0 0, 0 bottom, from(#ffba00), to(#ffd236));  
+    background:-o-linear-gradient(top, #ffba00, #ffd236); 
+}
+
+.item-bd {
+    padding: 7.5px 15px;
+    overflow: hidden;
+    font-size: 16px;
+    color: #ffffff;
+    position: relative;
+}
+
+.edt-bd {
+    border-radius: 5px;
+    background-color: #ffffff;
+    height: 50px;
+    position: relative;
+    border-bottom: 1px solid #fcdfc6;
+}
+.edt-bd .icon {
+    position: absolute;
+    height: 30px;
+    width: 50px;
+    top: 10px;
+    left: 0;
+    border-right: 1px solid #eeeeee;
+}
+
+.edt-bd .icon2 img {
+    height: 40%;
+    margin: 0 auto;
+}
+.edt-bd .icon2 {
+    position: absolute;
+    height: 30px;
+    width: 50px;
+    top: 20px;
+    right: 0;
+    border-right: 1px solid #eeeeee;
+}
+
+.edt-bd .icon img {
+    height: 100%;
+    margin: 0 auto;
+}
+.edt-bd input {
+    outline: none;
+    border: none;
+    width: 100%;
+    height: 100%;
+    padding-left: 50px;
+    box-sizing: border-box;
+    background: none;
+    font-size: 16px;
+    text-indent: 15px;
+}
+.buttonimg{
+	padding-top: 45px;
+	padding-bottom: 25px;
+}
+.eduimg{
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+.buttonimg a img{
+	width: 80%;
+    margin: 0 auto;
+}
+
+.selectinput input{
+	text-align: left;
+    color: #a9a9a9;
+}
+.selectdiv{
+	clear: both;
+	height: 30px;
+	background: #fff8e6;
+	color: #000;
+	text-indent: 15px;
+	display: none;
+	border-radius: 0 0 5px 5px;
+	margin-top: -1px;
+}
+.selectdiv div{
+	height: 30px;
+    line-height: 30px;
+}
+
+.eduimg img{
+	width: 100%;
+    margin: 0 auto;
+}
+.logoimg{
+	padding-top: 25px;
+    padding-bottom: 25px;
+}
+.logoimg img{
+	width: 30%;
+	margin:0 auto;
+}
+.accessbutton{
+	/*padding-top: 25px;*/
+    padding-bottom: 15px;
+}
+.accessbutton a img {
+    width: 65%;
+    margin: 0 auto;
+}
+.credit{
+	position: absolute;
+    left: 0;
+    right: 0;
+    text-align: center;
+    margin-top: 37%;
+    font-size: 230%;
+    font-weight: 600;
+    height: 35px;
+    line-height: 35px;
+    text-indent: -40px;
+    color: #ff910c;
+}
+
+#wxheadimg{
+    width: 25%;
+    margin:0 auto;
+     -webkit-box-shadow:5px 0 5px #ff9103; 
+    -moz-box-shadow:5px 0 5px #ff9103;
+    box-shadow: 5px 0 5px #ff9103;
+    border-radius: 50%;
+}
+.X-fontimg img{
+    width: 100%;
+   
+}
+.X-bottom img{
+    width: 100%;
+}
+
+.loding{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-top: -20%;
+}
+.loding i{
+    width: 15px;
+    height: 15px;
+    margin-left: 8px;
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 100%;
+    -webkit-animation: layui-m-anim-loading 1.4s infinite ease-in-out;
+    animation: layui-m-anim-loading 1.4s infinite ease-in-out;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.loding i:first-child {
+    margin-left: 0;
+    -webkit-animation-delay: -.32s;
+    animation-delay: -.32s;
+}
+
+.loding i.load {
+    -webkit-animation-delay: -.16s;
+    animation-delay: -.16s;
+}
+
+.share-tips {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    background: url(../image/xedai/share-tips.png) no-repeat;
+    background-size: 100% 100%;
+    display: none;
+}
+.cal{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-top: -20%;
+}

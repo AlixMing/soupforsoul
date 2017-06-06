@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<title></title>
+	<link rel="stylesheet" href="__PUBLIC__/css/style.css">
+	<script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+	<script src="__PUBLIC__/js/common.js"></script>
+</head>
+<body>
+<div>
+
+	<div class="column">
+		<dl class="dbox winbg1">
+			<dt class="lside"><span class="l">我的个人信息</span></dt>
+			<dd>
+				<div class="content">
+					您好，{$Think.session.yang_adm_username}<br/>
+					<div class="clear"></div>
+					上次登录时间：{$Think.session.yang_adm_logintime}<br/>
+					上次登录IP：{$Think.session.yang_adm_loginip} <br/>
+				</div>
+			</dd>
+		</dl>
+		<dl class="dbox winbg2">
+			<dt class="lside"><span class="l">系统信息</span></dt>
+			<dd>
+				<div class="content">
+					操作系统：{$os} <br />
+					服务器软件：{$software}<br />
+					MySQL 版本：{$mysql_ver}<br />
+					上传文件：{$environment_upload}<br />
+				 </div>
+			</dd>
+		</dl>
+	</div>
+
+	<div class="column">
+		<dl class="dbox winbg5">
+			<dt class="lside"><span class="l">CMS安全提示</span></dt>
+			<dd>
+				<div id="safelist" class="content">
+					更改后台入口文件 admin.php文件名；<br/>
+				</div>
+			</dd>
+	  	</dl>
+	</div>
+
+</div>
+</body>
+</html>

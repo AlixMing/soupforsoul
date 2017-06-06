@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title></title>
+    <link rel="stylesheet" href="__PUBLIC__/css/style.css">
+    <script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+    <script src="__PUBLIC__/js/common.js"></script>
+</head>
+<body>
+<div class="main">
+    <div class="pos">用户列表</div>    
+    <div class="operate">
+        <div class="left"><input type="button" onclick="goUrl('{:U('Rbac/addUser')}')" class="btn_blue" value="添加管理员">
+        <input type="button" onclick="doConfirmBatch('{:U('Rbac/delUser', array('batchFlag' => 1))}','确实要删除选择项吗？')" class="btn_blue" value="删除选中"></div>
+        <div class="left_pad">
+            <form method="post" action="{:U('Rbac/index')}">
+                <input type="text" name="keyword" title="管理员名称" class="inp_default" value="{$keyword}">
+                <input type="submit" class="btn_blue" value="查  询">
+            </form>
+        </div>
+    </div>
+    <div class="list">    
+    <form action="{:U('Rbac/delAllUser')}" method="post" id="form_do" name="form_do">
+        <table width="100%">
+            <tr>
+                <th><input type="checkbox" id="check"></th>
+                <th>编号</th>
+                <th>用户名</th>
+                <th>真实姓名</th>
+                <th>权限组</th>
+                <th>上次登录ip</th>
+                <th>上次登录时间</th>
+				<th>锁定</th>
+                <th>备选参数</th>
+                <th>操作</th>
+            </tr>
+			<foreach name='user' item='v'>
+            <tr>
+                <td><input type="checkbox" name="key[]" <if condition="$v['usertype'] eq 9">disabled="disabled"</if> value="{$v.id}"></td>
+                <td>{$v.id}</td>
+                <td>{$v.username}</td>
+                <td>{$v.realname}</td>
+                <td>
+
+                <if condition="$v['usertype'] eq 9">
+                超级管理员
+                <else/>
+				<foreach name='v["role"]' item='value'>
+				{$value.name}|
+				</foreach>
+				</if>
+
+				</td>
+                <td>{$v.loginip}</td>
+                <td>{$v.logintime|date='Y-m-d H:i:s',###}</td>
+				<td><if condition="$v['islock']">是<else/>否</if></td>
+                <td>{$v.param}</td>
+                <td>
+				<a href="{:U('Rbac/addUser',array('uid' => $v['id']),'')}">修改</a>
+                <if condition="$v['usertype'] eq 9">
+                删除
+                <else />
+				<a href="javascript:del('{:U('Rbac/delUser',array('uid' => $v['id']),'')}')">删除</a>
+                </if>
+				</td>
+            </tr>
+            </foreach>
+        </table>
+        <div class="page">{$page}</div>
+    </form>
+    </div>
+</div>
+</body>
+</html>

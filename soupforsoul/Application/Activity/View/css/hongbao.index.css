@@ -1,0 +1,196 @@
+
+body {
+    background-color: #FDDE46;
+}
+
+.main-area .bg {
+    width: 100%;
+}
+.main-area .cai {
+    position: absolute;
+    top: 65%;
+    left: 33%;
+    width: 34%;
+}
+.main-area .info {
+    position: absolute;
+    top: 50%;
+    left: 18%;
+    right: 18%;
+    color: #ffffff;
+}
+
+.hongbao-area {
+    position: absolute;
+    top: 10.5%;
+    left: 13%;
+    right: 12.5%;
+}
+
+.hongbao-area .top {
+    position: relative;
+}
+
+.hongbao-area .mid {
+    position: relative;
+    background-image: url(../image/hongbao/hongbao-mid.png);
+    background-size: 100% 100%;
+}
+
+.hongbao-area .bottom {
+    position: relative;
+}
+
+.hongbao-area .top .info {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 36%;
+    text-align: center;
+    color: #b62121;
+}
+
+.hongbao-area .top .info .money {
+    font-size: 30px;
+}
+
+.hongbao-area .top .info .money span {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.hongbao-area .top .info .tips {
+    font-size: 14px;
+}
+
+.hongbao-area .top .star {
+    position: absolute;
+    top: -3%;
+    left: -12%;
+    width: 120%;
+}
+
+.hongbao-area .top .close {
+    position: absolute;
+    top: 12%;
+    right: -5%;
+    width: 16.8%;
+}
+
+.hongbao-area .mid .info .tips {
+    text-align: center;
+    color: #ffffff;
+    font-size: 16px;
+}
+
+.hongbao-area .mid .info .tips span {
+    color: #fdde46;
+}
+
+.hongbao-area .mid .info .phone {
+    text-align: center;
+    color: #fdde46;
+    font-size: 20px;
+    padding: 10px 0 20px;
+}
+
+.form-area {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+    padding: 10px;
+}
+
+.form-area .row {
+    padding: 10px 5px 0 0;
+}
+
+.form-area .row-first {
+    padding-top: 0;
+}
+
+.form-area .text {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 5px;
+    height: 40px;
+}
+
+.form-area .icon {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box; /* Firefox */
+    -webkit-box-sizing: border-box; /* Safari */
+    padding: 5px;
+}
+
+.form-area .icon img {
+    width: 100%;
+}
+
+.form-area .input {
+    margin-left: 40px;
+    height: 100%;
+}
+
+.form-area .input input {
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.form-area .validate {
+    position: relative;
+}
+
+.form-area .validate .left {
+    margin-right: 100px;
+}
+
+.form-area .validate .right {
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    width: 90px;
+    height: 40px;
+}
+
+.form-area .validate button {
+    width: 100%;
+    height: 100%;
+    background-color: #fc8026;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    outline: none;
+}
+
+.hongbao-area .button {
+    margin-top: 20px;
+}
+
+.mask-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.8);
+}
+
+.share-tips {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 100;
+    background: url(../image/hongbao/share-tips.png) no-repeat;
+    background-size: 100% 100%;
+    display: none;
+}
+

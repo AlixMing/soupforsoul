@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title></title>
+    <link rel="stylesheet" href="__PUBLIC__/css/style.css">
+    <script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+    <script src="__PUBLIC__/js/common.js"></script>
+</head>
+<body>
+<div class="main">
+    <div class="pos">用户组列表</div>    
+    <div class="operate">
+        <div class="left"><input type="button" onclick="goUrl('{:U('Rbac/addRole')}')" class="btn_blue" value="添加用户组">
+        <input type="button" onclick="doConfirmBatch('{:U('Rbac/delRole', array('batchFlag' => 1))}','确实要删除选择项吗？')" class="btn_blue" value="删除选中"></div>
+        <div class="left_pad">
+            <form method="post" action="{:U('Rbac/role')}">
+                <input type="text" name="keyword" title="关键字" class="inp_default" value="{$keyword}">
+                <input type="submit" class="btn_blue" value="查  询">
+            </form>
+        </div>
+    </div>
+    <div class="list">    
+    <form action="{:U('Rbac/delRole')}" method="post" id="form_do" name="form_do">
+        <table width="100%">
+            <tr>
+                <th><input type="checkbox" id="check"></th>
+                <th>编号</th>
+                <th>用户组名称</th>
+                <th>描述</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+			<foreach name='role' item='v'>
+            <tr>
+                <td><input type="checkbox" name="key[]" value="{$v.id}"></td>
+                <td>{$v.id}</td>
+                <td>{$v.name}</td>
+                <td>{$v.remark}</td>
+                <td><if condition="$v['status']">是<else/>否</if></td>
+                <td>
+                <a href="{:U('Rbac/access',array('rid' => $v['id']),'')}">权限设置</a>
+				<a href="{:U('Rbac/addRole',array('id' => $v['id']),'')}">修改</a>
+				<a href="{:U('Rbac/delRole',array('id' => $v['id']),'')}" onclick="del('{:U('Rbac/delRole',array('id' => $v['id']),'')}'); return false;">删除</a>
+				</td>
+            </tr>
+            </foreach>
+        </table>
+        <div class="page">{$page}</div>
+    </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title></title>
+    <link rel="stylesheet" href="__PUBLIC__/css/style.css">
+    <script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
+    <script src="__PUBLIC__/js/common.js"></script>
+  
+</head>
+<body>
+
+<div class="main">
+    <div class="pos">兑换码列表</div>
+    <div class="operate">
+        <div class="left">
+            <form method="post" action="{:U('Xedai/expCode')}">
+                <input type="submit"  class="btn_blue" value="导出数据">
+            </form>
+        </div>
+        <div class="left">
+            <form action="{:U('Xedai/upload')}" method="post" enctype="multipart/form-data">
+                <input type="file" name="excelData" class="inp_default">
+                <input type="submit" class="btn_blue" value="导入用户">
+            </form>
+        </div>
+    </div>
+  <!--   <div class="operate">
+        <div class="left">
+            <input type="text" id="txtCode" title="兑换码" class="inp_default" placeholder="兑换码">
+            <input type="button" class="btn_blue" value="查  询" onclick="doSearch()">
+        </div>
+    </div> -->
+    <div class="list">
+        <table width="100%">
+            <tr>
+                <th>序号</th>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>手机号</th>
+                <!-- <th>年收入</th> -->
+                <th>状态</th>
+                <th>授信额度</th>
+                <th>操作</th>
+            </tr>
+            <foreach name='vlist' item='vo'>
+            <tr>
+                <td>{$vo.id}</td>
+                <td>{$vo.xnumber}</td>
+                <td>{$vo.xname}</td>
+                <td>{$vo.xphone}</td>
+                <!-- <td>{$vo.xincome}</td> -->
+                <td>
+                    <if condition="$vo.status eq 0">
+                        未申请
+                    <elseif condition="$vo.status eq 1"/>
+                        申请中
+                    <elseif condition="$vo.status eq 2"/>
+                        已审核
+                    <else/>
+                        已完成
+                    </if>
+                </td>
+                <td>{$vo.xcredit}/元</td>
+                <td>
+
+                    <if condition="$vo.status eq 1">
+                        <a href="{:U('Xedai/edit',array('id' => $vo['id'],'status'=> 2))}">审核</a>
+                    </if>
+                    
+                     <if condition="$vo.status eq 2">
+                        <a href="{:U('Xedai/edit',array('id' => $vo['id'],'status'=> 3))}">完成</a>
+                    </if>
+                </td>
+                
+            </tr>
+            </foreach>
+        </table>
+        <div class="page">{$page}</div>
+    </div>
+</div>
+
+</body>
+</html>
