@@ -1,53 +1,55 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
-	<title>海控金融活动后台管理</title>
-	<script>
-	//	var verifyUrl="{:U('Login/verify','','')}";
-		var CONTROL_U = "{:U('Login/checkusername')}";
-		var CONTROL_P = "{:U('Login/checkpassword')}";
-		var URLPATHDEPR = "{:C('URL_PATHINFO_DEPR')}";
-	</script>
-
-	<script src="__PUBLIC__/js/jquery-1.11.1.min.js"></script>
-	<script src="__PUBLIC__/js/login.js"></script>
-	<link rel="stylesheet" href="__PUBLIC__/css/login.css">
-</head>	
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>登录</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <link rel="alternate icon" type="image/png" href="__PUBLIC__/assets/i/favicon.png">
+  <link rel="stylesheet" href="__PUBLIC__/assets/css/amazeui.min.css"/>
+  <style>
+    .header {
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 200%;
+      color: #333;
+      margin-top: 30px;
+    }
+    .header p {
+      font-size: 14px;
+    }
+  </style>
+</head>
 <body>
-	<div class="login">
-		<div class="loginForm">	
-			<form action="{:U('Login/login')}" method="post" id="login">
-			<div class="title">
-				海控金融活动后台管理登录
-			</div>
-			<table width="100%">
-				<tr>
-					<th>帐号:</th>
-					<td>
-						<input type="text" name="username" class="len220">
-					</td>
-				</tr>
-				<tr>
-					<th>密码:</th>
-					<td>
-						<input type="password" class="len220" name="password">
-					</td>
-				</tr>
-				<!--<tr>-->
-					<!--<th>验证码:</th>-->
-				  <!--<td>-->
-						<!--<input type="code" class="len220" name="code" autocomplete="off" /></td>-->
-				<!--</tr>-->
-				<!--?-->
-				<tr>
-					<td colspan="2" style="padding-left:120px;"><input type="submit" class="btn_blue" value="登录"><span class="msg"></span></td>
-				</tr>
-			</table>
-			</form>
-		</div>
-	</div>
+<div class="header">
+  <div class="am-g">
+    <h1>心灵鸡汤</h1>
+    <p>Integrated Development Environment<br/>代码编辑，代码生成，界面设计，调试，编译</p>
+  </div>
+  <hr />
+</div>
+<div class="am-g">
+  <div class="am-u-lg-6 am-u-md-8 am-u-sm-centered">
+    <h3>登录</h3>
+    <hr>
 
+    <form action="{:U('Login/login')}" method="post" class="am-form">
+      <label for="username">用户名:</label>
+      <input type="text" name="username" id="username">
+      <br>
+      <label for="password">密码:</label>
+      <input type="password" name="password" id="password">
+      <br>
+      <div class="am-cf">
+        <input type="submit" name="" value="登 录" class="am-btn am-btn-primary am-btn-sm am-fl">
+      </div>
+    </form>
+    <hr>
+  </div>
+</div>
 </body>
 </html>
