@@ -4,5 +4,5 @@
 
 ## 技术支持
 
-1、ThinkPHP
-2、AmazeUI
+#1、ThinkPHP
+#2、AmazeUI
