@@ -1,6 +1,6 @@
 <?php
 
-namespace Activity\Controller;
+namespace Api\Controller;
 use Think\Controller;
 use Think\Model;
 

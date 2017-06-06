@@ -1,5 +1,5 @@
 <?php
-namespace Activity\Controller;
+namespace Api\Controller;
 use Think\Controller;
 use Think\Model;
 
@@ -37,7 +37,6 @@ class XedaiCronController extends Controller {
 				$msg = "温馨提醒，您的薪e贷今天到期还款，还款金额".$k[amount]."元，请您及时还款以免产生滞纳金。如已还款请忽略该条信息。";
 				$result = sendMsg1($k[phone], $msg);
 				\Think\Log::write('sendMsg1-phone:'.$k[phone].',msg:'.$msg.',result:'.$result,'ALERT');
-				
 			}
 		}
 	}
